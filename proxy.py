@@ -26,6 +26,10 @@ def get_connection():
         sslmode="require"
     )
 
+@app.route("/")
+def index():
+    return "Proxy API is running. Access /signatures for data."
+
 @app.route("/signatures", methods=["GET"])
 def fetch_signatures():
     """Fetches and pivots signature data into one row per respondent."""
@@ -84,4 +88,7 @@ def fetch_signatures():
             conn.close()
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    port = int(os.environ.get("PORT", 5001))
+    print(f"Starting server on port {port}")
+    app.run(debug=True, host='0.0.0.0', port=port)
+
