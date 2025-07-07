@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: an-sql-proxy
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: gunicorn proxy:app
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_PORT
+        value: "5439"
+      - key: CACHE_MODE
+        value: hourly
